@@ -1,0 +1,42 @@
+---
+title: "Echickwt"
+author: "Ebtisam alghamdi"
+output: html_document
+---
+
+
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+## Chickwt Data-set
+
+
+ 
+```{r}
+chickwts <- as_tibble(chickwts)
+```
+#summary 
+```{r }
+summary(chickwts)
+```
+#mean
+```{r}
+mean(chickwts$weight)
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r feed, echo=FALSE}
+plot (chickwts$feed)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

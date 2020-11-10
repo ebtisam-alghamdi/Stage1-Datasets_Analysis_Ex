@@ -1,0 +1,83 @@
+---
+title: "Diamon Dataset ِAnalysis"
+author: "Ebtisam alghamdi"
+output: html_document
+---
+
+```{r setup, include=FALSE }
+knitr::opts_chunk$set(echo = FALSE, character(length = 2),
+                      message = FALSE, warning = FALSE)
+```
+
+
+```{r}
+#Importing Packages That We Need 
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library(RColorBrewer)
+library(kableExtra)
+library(formattable)
+```
+
+
+```{r}
+
+#Reading The Diamonds Dataset 
+diamonds <- read.csv("diamonds.csv")
+```
+
+
+In this report i will do some analysis on __"Diamonds"__ dataset.The [dataset](https://www.kaggle.com/shivam2503/diamonds) contain diamonds attributes like _carat,cut,color,clarity,depth and price_.
+
+This report will answer many quastions like :
+
+* what is the range of the diamonds price?o
+* which attribute will effect the diamond price ?
+* What is highest diamond price and its attributes?o
+* what is the diamonds colors and which has the highest value and price ?
+* What is the different names of the diamonds clarity?
+* what is the attributes for each diamonds cut?
+
+This Dataset contain 53940 different Diamonds type with price range :
+
+
+```{r}
+#What is the range of the diamonds prices?
+
+kbl(diamonds %>%
+  summarise(The_Range=range(diamonds$price)))
+
+```
+
+```{r}
+#Show the diamonds prices in relation with the carat 
+ggplot(diamonds, aes(x = carat, y = price,color=cut)) +
+  geom_point(Shape= 18, alpha=0.3)+
+  theme_classic()
+```
+
+
+
+__Diamonds Prices With Relation with Carat__
+
+#What is highest diamond price and its attributes?
+
+```{r}
+
+customGreen0 = "#DeF7E9"
+
+customGreen = "#71CA97"
+
+customRed = "#ff7f7f"
+#The Highest Diamond Price 
+hidiamnod <-diamonds %>% 
+  filter(price== max(price))
+
+formattable(hidiamnod, prstyle=formatter("span",
+  'price'=color_tile(customGreen)))
+
+```
+
+
+
