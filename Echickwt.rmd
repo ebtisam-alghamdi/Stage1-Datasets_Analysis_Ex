@@ -13,30 +13,27 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(dplyr)
+library(kableExtra)
 ```
 ## Chickwt Data-set
 
 
  
 ```{r}
-chickwts <- as_tibble(chickwts)
-```
-#summary 
-```{r }
-summary(chickwts)
-```
-#mean
-```{r}
-mean(chickwts$weight)
+#The mean for chicken weight in relashion with the feed 
+kbl(chickwts %>% 
+  group_by(feed) %>% 
+  summarise(wightes_mean=mean(weight)))
 ```
 
+```{r}
+#The chicken weight range
+kbl(chickwts %>%
+  summarise(The_Weights_Range=range(chickwts$weight)))
+```
 
 ## Including Plots
-
-You can also embed plots, for example:
 
 ```{r feed, echo=FALSE}
 plot (chickwts$feed)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

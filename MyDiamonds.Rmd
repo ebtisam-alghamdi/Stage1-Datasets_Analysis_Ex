@@ -23,8 +23,10 @@ library(formattable)
 
 ```{r}
 
-#Reading The Diamonds Dataset 
-diamonds <- read.csv("diamonds.csv")
+#Reading The Diamonds Dataset
+diamonds <- read.csv("diamonds.csv",stringsAsFactors = TRUE)
+
+
 ```
 
 
@@ -33,9 +35,8 @@ In this report i will do some analysis on __"Diamonds"__ dataset.The [dataset](h
 This report will answer many quastions like :
 
 * what is the range of the diamonds price?o
-* which attribute will effect the diamond price ?
 * What is highest diamond price and its attributes?o
-* what is the diamonds colors and which has the highest value and price ?
+* what is the diamonds colors and which has the highest price ?
 * What is the different names of the diamonds clarity?
 * what is the attributes for each diamonds cut?
 
@@ -47,6 +48,7 @@ This Dataset contain 53940 different Diamonds type with price range :
 
 kbl(diamonds %>%
   summarise(The_Range=range(diamonds$price)))
+
 
 ```
 
@@ -64,6 +66,7 @@ __Diamonds Prices With Relation with Carat__
 #What is highest diamond price and its attributes?
 
 ```{r}
+#What is highest diamond price and its attributes?
 
 customGreen0 = "#DeF7E9"
 
@@ -80,4 +83,11 @@ formattable(hidiamnod, prstyle=formatter("span",
 ```
 
 
+```{r}
+#what is the diamonds colors and its prices ?
+
+diamonds %>% 
+   group_by(color)
+
+```
 
