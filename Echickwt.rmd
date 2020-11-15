@@ -1,30 +1,47 @@
 ---
 title: "Echickwt"
-author: "Ebtisam alghamdi"
 output: html_document
 ---
 
 
 
-```{r setup, include=TRUE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE }
+knitr::opts_chunk$set(echo = FALSE, character(length = 2),
+                      message = FALSE, warning = FALSE)
 ```
 
 ```{r}
+#importing packages that i need
+
 library(tidyverse)
 library(dplyr)
 library(kableExtra)
+library(ggplot2)
 ```
-## Chickwt Data-set
 
-
- 
 ```{r}
-#The mean for chicken weight in relashion with the feed 
+view(chickwts)
+```
+
+This Dataset contain data for chicks were randomly selected and grouped in to six groups,and each group was given a different feed supplement like :
+After six weeks they meager the chicken weights along with feed types.
+
+
+__The Changing Range in Chicken Weights In Relation With The Feed Is:__
+
+```{r}
+#The mean for chicken weight in relation with the feed 
 kbl(chickwts %>% 
   group_by(feed) %>% 
-  summarise(wightes_mean=mean(weight)))
+  summarise(wightes_range=range(weight)))
 ```
+
+
+
+
+__The Total Gain For Chickens Wights Was In This Range :__
+
+
 
 ```{r}
 #The chicken weight range
@@ -35,5 +52,10 @@ kbl(chickwts %>%
 ## Including Plots
 
 ```{r feed, echo=FALSE}
-plot (chickwts$feed)
+
+ggplot(chickwts,aes(x=weight,y=feed,color=feed))+
+geom_point(shape=19,alpha=0.4)+
+geom_jitter(data = NULL)+
+theme_classic()
+
 ```

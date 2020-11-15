@@ -16,8 +16,6 @@ library(tidyverse)
 library(knitr)
 library(ggplot2)
 library(RColorBrewer)
-library(kableExtra)
-library(formattable)
 ```
 
 
@@ -46,48 +44,39 @@ This Dataset contain 53940 different Diamonds type with price range :
 ```{r}
 #What is the range of the diamonds prices?
 
-kbl(diamonds %>%
-  summarise(The_Range=range(diamonds$price)))
+diamonds %>%
+  summarise(The_Range=range(diamonds$price))
 
 
 ```
 
 ```{r}
-#Show the diamonds prices in relation with the carat 
-ggplot(diamonds, aes(x = carat, y = price,color=cut)) +
+#Show the diamonds prices for each carat:
+ggplot(diamonds, aes(x = carat, y = price,color=cut),main="Diamonds Price") +
   geom_point(Shape= 18, alpha=0.3)+
   theme_classic()
 ```
 
 
-
-__Diamonds Prices With Relation with Carat__
-
 #What is highest diamond price and its attributes?
 
 ```{r}
 #What is highest diamond price and its attributes?
 
-customGreen0 = "#DeF7E9"
-
-customGreen = "#71CA97"
-
-customRed = "#ff7f7f"
 #The Highest Diamond Price 
-hidiamnod <-diamonds %>% 
+diamonds %>% 
   filter(price== max(price))
-
-formattable(hidiamnod, prstyle=formatter("span",
-  'price'=color_tile(customGreen)))
 
 ```
 
+#What is the diamonds colors and its prices ?
 
 ```{r}
 #what is the diamonds colors and its prices ?
 
 diamonds %>% 
-   group_by(color)
+   group_by(color) %>% 
+summarise(Price_Range=range(price))
 
 ```
 
